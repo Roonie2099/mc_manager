@@ -1,0 +1,7 @@
+# Ignore all mods in storage
+#This folder is where you stores your mods
+
+
+# Keep this file so Git stores the folder
+mods_storage/*.jar
+z_mod_instance_control.json
