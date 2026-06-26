@@ -7,7 +7,7 @@ Minecraft Mod Manager is a simple command-line (Terminal/Command Prompt) applica
 It allows you to create **instances** (collections of mods), quickly switch between them, and maintain a list of **Always Mods** that stay enabled regardless of the selected instance.
 
 > **Current Version:** v1.0 (Beta)
-> <img width="1485" height="761" alt="image" src="https://github.com/user-attachments/assets/40d87d3c-9404-4664-b29e-de5fa4fba50b" />
+> <img width="936" height="497" alt="image" src="https://github.com/user-attachments/assets/941a4dd2-24e3-4488-aac2-a323e0d89322" />
 
 ---
 
