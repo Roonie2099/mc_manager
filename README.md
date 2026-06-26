@@ -1,20 +1,52 @@
-Prepare before using:
-1. Make a folder with whatever name you want(prefer naming it "mc_manager") and take the file "mod_manager.exe" and folder "mods_storage" put it in the big folder just made
-2. After that, put the big folder into the folder "game" in minecraft folder
-3. Now move all your mods into the "mods_storage" folderr
-4. Everything seem perfect now( you can make a shorcut for "mod_manager.exe" in the deckstop if you want )
+# Minecraft Mod Manager (v1.0)
 
-How to use:
-1.Open folder and run the file "mod_manager.exe"
-2.Make a shortcut for "mod_manager.exe" in the deckstop and run it by double click
+## Before Using
+1. Create a new folder (it is recommended to name it **mc_manager**).
+2. Copy **mod_manager.exe** and the **mods_storage** folder into the folder you just created.
+3. Move the **mc_manager** folder into your Minecraft **game** directory (the folder that contains the **mods** folder).
+4. Move all of your mod `.jar` files into the **mods_storage** folder.
+5. You're all set!
 
-*File "mod_manager.py" is source code for "mod_manager.py" using python, you can take it and use or do whatever you want (require python and have same location with "mod_manager.exe")
+You can also create a desktop shortcut for **mod_manager.exe** if you want quicker access.
 
-Feature:
-1. You can add/remove mods from using or add/change instances* and manage all of it
-2. You can add always_mods* too
+---
 
-*instance is a group of mods you want to use it all together
-*always_mods is mods that you always want to use
+## How to Use
+There are two ways to launch the program:
 
-***This file is still in progress and uncompleted    --v1.0
+### Option 1
+Open the **mc_manager** folder and double-click **mod_manager.exe**.
+
+### Option 2
+Create a desktop shortcut for **mod_manager.exe**, then launch it from the shortcut.
+
+---
+
+## Source Code
+
+The file **mod_manager.py** contains the Python source code used to build **mod_manager.exe**.
+
+Feel free to study, modify, or reuse it. Running the Python version requires Python to be installed, and the file should remain in the same directory structure as the executable.
+
+---
+
+## Features
+
+* Add mods to the active Minecraft mods folder.
+* Remove mods from the active Minecraft mods folder.
+* Create and manage mod instances.
+* Switch between different mod instances.
+* Manage **Always Mods**, which are automatically included whenever you switch instances.
+
+### Definitions
+
+**Instance** – A collection of mods that you want to enable together.
+
+**Always Mods** – Mods that should always remain enabled regardless of the selected instance.
+
+---
+
+## Current Version
+**v1.0**
+
+This project is still under development, and additional features will be added in future updates.
