@@ -1,52 +1,101 @@
-# Minecraft Mod Manager (v1.0)
+# 🎮 Minecraft Mod Manager
 
-## Before Using
-1. Create a new folder (it is recommended to name it **mc_manager**).
-2. Copy **mod_manager.exe** and the **mods_storage** folder into the folder you just created.
-3. Move the **mc_manager** folder into your Minecraft **game** directory (the folder that contains the **mods** folder).
-4. Move all of your mod `.jar` files into the **mods_storage** folder.
-5. You're all set!
+A lightweight Minecraft mod manager written in Python.
 
-You can also create a desktop shortcut for **mod_manager.exe** if you want quicker access.
+Minecraft Mod Manager is a simple command-line (Terminal/Command Prompt) application that helps you manage your Minecraft mods without manually moving `.jar` files every time you want to switch modpacks.
+
+It allows you to create **instances** (collections of mods), quickly switch between them, and maintain a list of **Always Mods** that stay enabled regardless of the selected instance.
+
+> **Current Version:** v1.0 (Beta)
 
 ---
 
-## How to Use
-There are two ways to launch the program:
+# Features
+
+* Add mods to the active Minecraft `mods` folder.
+* Remove mods from the active Minecraft `mods` folder.
+* Create and manage multiple mod instances.
+* Instantly switch between different instances.
+* Support **Always Mods**, which remain enabled for every instance.
+* Automatically removes missing mods from saved instance data.
+* Lightweight and portable.
+* Runs in the Windows Terminal / Command Prompt.
+
+---
+
+# Installation
+
+1. Create a new folder (recommended name: **mc_manager**).
+2. Put the following into that folder:
+
+   * `mod_manager.exe`
+   * `mods_storage` folder
+3. Move the **mc_manager** folder into your Minecraft **game** folder (the folder containing the `mods` folder).
+4. Put all of your `.jar` mods into the `mods_storage` folder.
+
+Your folder structure should look like this:
+
+```text
+game
+│
+├── mods
+│
+└── mc_manager
+    ├── mod_manager.exe
+    ├── mods_storage
+    └── mod_instance_data.json
+```
+
+The JSON file will be created automatically the first time you run the program.
+
+---
+
+# Running the Program
+
+There are two ways to launch Minecraft Mod Manager.
 
 ### Option 1
-Open the **mc_manager** folder and double-click **mod_manager.exe**.
+
+Open the **mc_manager** folder and double-click:
+
+```
+mod_manager.exe
+```
 
 ### Option 2
-Create a desktop shortcut for **mod_manager.exe**, then launch it from the shortcut.
+
+Create a desktop shortcut for:
+
+```
+mod_manager.exe
+```
+
+and launch it from the shortcut.
+
+The program runs inside the Windows Terminal / Command Prompt.
 
 ---
 
-## Source Code
+# Definitions
 
-The file **mod_manager.py** contains the Python source code used to build **mod_manager.exe**.
+### Instance
 
-Feel free to study, modify, or reuse it. Running the Python version requires Python to be installed, and the file should remain in the same directory structure as the executable.
-
----
-
-## Features
-
-* Add mods to the active Minecraft mods folder.
-* Remove mods from the active Minecraft mods folder.
-* Create and manage mod instances.
-* Switch between different mod instances.
-* Manage **Always Mods**, which are automatically included whenever you switch instances.
-
-### Definitions
-
-**Instance** – A collection of mods that you want to enable together.
-
-**Always Mods** – Mods that should always remain enabled regardless of the selected instance.
+An **Instance** is a collection of mods that you want to use together.
+Each instance stores its own list of mods.
 
 ---
 
-## Current Version
-**v1.0**
+### Always Mods
 
-This project is still under development, and additional features will be added in future updates.
+**Always Mods** are mods that will always be enabled, regardless of the selected instance.
+These mods don't need to be added to every instance separately.
+
+---
+
+# Source Code
+
+`mod_manager.py` is the original Python source code used to build `mod_manager.exe`.
+
+Feel free to study, modify, or reuse the code.
+
+Running the Python version requires Python to be installed.
