@@ -66,6 +66,8 @@ def refresh():
     global mod_in_use
     global mod_in_storage
     global mod_not_in_use
+    global instance_using
+    instance_using = "Costume"
 
     mod_in_use = [
         mod
@@ -86,12 +88,22 @@ def refresh():
     ]
 
     data = read_json()
+
     for ins in data:
         data[ins] = [
             mod
             for mod in data[ins]
             if (mods_storage_path / mod).exists()
         ]
+
+    if not mod_in_use:
+        instance_using = "No mod or ins detected"
+    else:
+        for ins in data:
+            mod_list = sorted(data[ins])
+            if sorted([mod.name for mod in mod_in_use]) == mod_list:
+                instance_using = ins
+                break
     write_json(data)
 
 
@@ -100,18 +112,18 @@ def refresh():
 def menu():
     refresh()
     os.system("cls")
-    print("Minecraft Mod Manager (beta)  -by Roonie-")
+    print("Minecraft Mod Manager (v1.0)  -by Roonie-")
     print()
     print("Mod using:",len(mod_in_use))
-    print("Instace using:")
+    print("Instace using:",instance_using)
     print()
-    print("1. Add new mod to use")
+    print("1. Add mod to use")
     print("2. Delet mod from using")
     print("3. Add new instance")
     print("4. Change instance to use")
     print("5. Delet all mod from using")
     print("6. Always-mod control")
-    print("7. Instance control")
+    print("7. Add/delete mods in isntance")
 
     choose = input("Select your choice: ")
     while choose not in [str(i+1) for i in range(7)]:
@@ -128,9 +140,9 @@ def menu():
     elif choose == 5:
         Delete_all_mod_from_use()
     elif choose == 6:
-        Mod_control()
+        Always_mods_control()
     elif choose == 7:
-        Instance_control()
+        Add_delete_mod_instance()
     refresh()
 
 
@@ -209,18 +221,17 @@ def Add_new_instance():
         return
     else:
         exit()
-    
+
 
 def Change_instance():
     refresh()
     os.system("cls")
-    print("     CHANGE MOD IN INSTANCE")
+    print("     CHANGE INSTANCE TO USE")
     print()
     data = read_json()
-    temp_data = list(data.keys())
-    temp_data.remove("Always_mods")
+    temp_data = [ins for ins in data if ins != "Always_mods"]
     if not temp_data:
-        print("No instance to change")
+        print("No instance in the list")
         refresh()
         choose = str(input("Do you want to return to menu?(y/n): "))
         if choose == "y":
@@ -228,39 +239,35 @@ def Change_instance():
         else:
             exit()
 
+    print("Instance list")
     for i in range(len(temp_data)):
         print(str(i+1)+".",temp_data[i])
     choose = str(input("Choose instance to change: "))
     while choose not in [str(n+1) for n in range(i+1)]:
         choose = input("Wrong input, please choose instance to change again: ")
     choose = int(choose)
-   
-    print()
-    print("Instance chose:",temp_data[choose-1])
-    second_choose = input("Press 0 to add mod, press 1 to delet mod: ")
-    while second_choose not in ["0","1"]:
-        second_choose = input("Wrong input, please try again: ")
-    print()
-    print("Mods list in instance: ")
 
-    if second_choose == "0":
-        mod_list = [n for n in mod_in_storage if n.name not in data[temp_data[choose-1]]]
-        print()
-        data_choose = select_mod(mod_list)
-        if data_choose is None:
-            return
-        for i in data_choose:
-            mod = mod_list[i-1].name
-            data[temp_data[choose-1]].append(mod)
-    else:
-        mod_list = [mods_storage_path / n for n in data[temp_data[choose-1]]]
-        print()
-        data_choose = select_mod(mod_list)
-        if data_choose is None:
-            return
-        for i in sorted(data_choose, reverse=True):
-            data[temp_data[choose-1]].pop(i-1)
-    write_json(data)
+    for mod in mod_in_use:
+        shutil.copy2(
+            mod,
+            mods_storage_path)
+        mod.unlink()
+
+    for mod in data[temp_data[choose-1]]:
+        selected_mod = mods_storage_path / mod
+        shutil.copy2(
+            selected_mod,
+            mods_path)
+    
+    choose_2 = input("Do you want to keep always-mods from using?(y/n): ")    
+    while choose_2 not in ["y","n"]:
+        choose_2 = input("Wrong input, please try again(y/n): ")
+    if choose_2 == "y":
+        for mod in data["Always_mods"]:
+            selected_mod = mods_storage_path / mod
+            shutil.copy2(
+                selected_mod,
+                mods_path)
     print("Task succeed")
     refresh()
     choose = str(input("Do you want to return to menu?(y/n): "))
@@ -268,6 +275,8 @@ def Change_instance():
         return
     else:
         exit()
+
+    
 
 
 def Delete_all_mod_from_use():
@@ -304,6 +313,119 @@ def Delete_all_mod_from_use():
         return
     else:
         exit()
+
+
+def Always_mods_control():
+    refresh()
+    os.system("cls")
+    print("     ALWAYS_MOD CONTROL")
+    print()
+    data = read_json()
+    temp_data = [mod for mod in data["Always_mods"]]
+    
+    if not temp_data:
+        print("No mod in the list")
+        print()
+        second_choose = input("Press 0 to add mod: ")
+        while second_choose not in ["0"]:
+            second_choose = input("Wrong input, please try again: ")
+    else:
+        print("Mod in always_mods list:")
+        for i in range(len(temp_data)):
+            print(str(i+1)+".", temp_data[i])
+        print()
+        second_choose = input("Press 0 to add mod, press 1 to delet mod: ")
+        while second_choose not in ["0","1"]:
+            second_choose = input("Wrong input, please try again: ")
+    
+    print()
+    if second_choose == "0":
+        mod_list = [mod for mod in mod_in_storage if mod.name not in data["Always_mods"]]
+        print()
+        data_choose = select_mod(mod_list)
+        if data_choose is None:
+            return
+        for i in data_choose:
+            mod = mod_list[i-1].name
+            data["Always_mods"].append(mod)
+    else:
+        mod_list = [mods_storage_path / n for n in data["Always_mods"]]
+        print()
+        data_choose = select_mod(mod_list)
+        if data_choose is None:
+            return
+        for i in sorted(data_choose, reverse=True):
+            data["Always_mods"].pop(i-1)
+    write_json(data)
+    print("Task succeed")
+    refresh()
+    choose = str(input("Do you want to return to menu?(y/n): "))
+    if choose == "y":
+        return
+    else:
+        exit()
+
+
+
+def Add_delete_mod_instance():
+    refresh()
+    os.system("cls")
+    print("     ADD/DELETE MOD IN INSTANCE")
+    print()
+    data = read_json()
+    temp_data = list(data.keys())
+    temp_data.remove("Always_mods")
+    if not temp_data:
+        print("No instance to change")
+        refresh()
+        choose = str(input("Do you want to return to menu?(y/n): "))
+        if choose == "y":
+            return
+        else:
+            exit()
+
+    print("Instance list:")
+    for i in range(len(temp_data)):
+        print(str(i+1)+".",temp_data[i])
+    choose = str(input("Choose instance to change: "))
+    while choose not in [str(n+1) for n in range(i+1)]:
+        choose = input("Wrong input, please choose instance to change again: ")
+    choose = int(choose)
+   
+    print()
+    print("Instance chose:",temp_data[choose-1])
+    second_choose = input("Press 0 to add mod, press 1 to delete mod: ")
+    while second_choose not in ["0","1"]:
+        second_choose = input("Wrong input, please try again: ")
+    print()
+    print("Mods list in instance: ")
+
+    if second_choose == "0":
+        mod_list = [n for n in mod_in_storage if n.name not in data[temp_data[choose-1]]]
+        print()
+        data_choose = select_mod(mod_list)
+        if data_choose is None:
+            return
+        for i in data_choose:
+            mod = mod_list[i-1].name
+            data[temp_data[choose-1]].append(mod)
+    else:
+        mod_list = [mods_storage_path / n for n in data[temp_data[choose-1]]]
+        print()
+        data_choose = select_mod(mod_list)
+        if data_choose is None:
+            return
+        for i in sorted(data_choose, reverse=True):
+            data[temp_data[choose-1]].pop(i-1)
+    write_json(data)
+    print("Task succeed")
+    refresh()
+    choose = str(input("Do you want to return to menu?(y/n): "))
+    if choose == "y":
+        return
+    else:
+        exit()
+
 
 while True:
     refresh()
