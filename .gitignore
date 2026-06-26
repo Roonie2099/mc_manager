@@ -4,4 +4,7 @@
 
 # Keep this file so Git stores the folder
 mods_storage/*.jar
-z_mod_instance_control.json
+mod_instance_data.json
+mod_manager.py
+.bat
+build
