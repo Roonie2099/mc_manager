@@ -53,7 +53,7 @@ The JSON file will be created automatically the first time you run the program.
 
 # Running the Program
 
-There are two ways to launch Minecraft Mod Manager.
+There are three ways to launch Minecraft Mod Manager.
 
 ### Option 1
 
@@ -72,6 +72,10 @@ mod_manager.exe
 ```
 
 and launch it from the shortcut.
+
+### Option 3
+
+Go to the newest released version and follow the instructions in README or description
 
 The program runs inside the Windows Terminal / Command Prompt.
 
