@@ -26,6 +26,8 @@ It allows you to create **instances** (collections of mods), quickly switch betw
 
 # Installation
 
+Download the latest version from the GitHub Releases page and follow the instructions on README or follow steps below:
+
 1. Create a new folder (recommended name: **mc_manager**).
 2. Put the following into that folder:
 
@@ -72,10 +74,6 @@ mod_manager.exe
 ```
 
 and launch it from the shortcut.
-
-### Option 3
-
-Go to the newest released version and follow the instructions in README or description
 
 The program runs inside the Windows Terminal / Command Prompt.
 
