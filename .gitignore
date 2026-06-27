@@ -7,3 +7,4 @@ mods_storage/*.jar
 mod_instance_data.json
 .bat
 build
+*.zip
