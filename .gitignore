@@ -8,3 +8,5 @@ mod_instance_data.json
 .bat
 build
 *.zip
+release
+*txt

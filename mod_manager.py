@@ -40,13 +40,14 @@ def write_json(data):
 
 
 def finish_task():
+    print()
     print("Task succeed")
     refresh()
     choose = str(input("Do you want to return to menu?(y/n): "))
     if choose == "y":
         return
     else:
-        exit()
+        sys.exit()
 
 def select_mod(list_select):
     if not list_select:
@@ -118,12 +119,11 @@ def refresh():
                 break
     
 
-
 #Các màn hình chính
 def menu():
     refresh()
     os.system("cls")
-    print("Minecraft Mod Manager (v1.1)  -by Roonie-")
+    print("Minecraft Mod Manager (v1.2)  -by Roonie-")
     print()
     print("Mod using:",len(mod_in_use))
     print("Instace using:",instance_using)
@@ -165,6 +165,7 @@ def menu_mod_control():
     while choose not in [str(i+1) for i in range(3)]:
         choose = input("Select your choice again: ")
     choose = int(choose)
+    print()
     if choose in [1,2]:
         if choose == 1:
             data = [mod.name for mod in mod_in_use]
@@ -184,7 +185,6 @@ def menu_mod_control():
         Always_mods_control()
     return
         
-
 
 def menu_ins_control():
     refresh()
@@ -211,7 +211,7 @@ def menu_ins_control():
             data_list = list(data.keys())
             print("Instance list:")
             for i in range(len(data)):
-                print(str(i)+".",data_list[i]+":")
+                print(str(i+1)+".",data_list[i]+":")
                 for mod in data[data_list[i]]:
                     print(" -",mod)
                 print()
@@ -302,6 +302,8 @@ def Change_instance():
     print("Instance list")
     for i in range(len(temp_data)):
         print(str(i+1)+".",temp_data[i])
+    print()
+    
     choose = str(input("Choose instance to change: "))
     while choose not in [str(n+1) for n in range(i+1)]:
         choose = input("Wrong input, please choose instance to change again: ")
@@ -425,6 +427,7 @@ def Add_delete_mod_instance():
     print("Instance list:")
     for i in range(len(temp_data)):
         print(str(i+1)+".",temp_data[i])
+    print()
     choose = str(input("Choose instance to change: "))
     while choose not in [str(n+1) for n in range(i+1)]:
         choose = input("Wrong input, please choose instance to change again: ")
