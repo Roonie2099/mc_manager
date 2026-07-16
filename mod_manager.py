@@ -77,7 +77,7 @@ def refresh():
     global mod_in_storage
     global mod_not_in_use
     global instance_using
-    instance_using = "Costume"
+    instance_using = "Costom"
 
     mod_in_use = [
         mod
@@ -129,10 +129,10 @@ def menu():
     print("Instace using:",instance_using)
     print()
     print("1. Add mod to use")
-    print("2. Delet mod from using")
+    print("2. Delete mod from using")
     print("3. Add new instance")
     print("4. Change instance to use")
-    print("5. Delet all mod from using")
+    print("5. Delete all mod from using")
     print("6. Mod contol menu")
     print("7. Instance control menu")
 
@@ -192,8 +192,8 @@ def menu_ins_control():
     print("     INSTANCE CONTROL MENU")
     print()
     print("1. All instance/mod list")
-    print("2. Add/delet mod in instance")
-    print("3. Delet instance")
+    print("2. Add/delete mod in instance")
+    print("3. Delete instance")
 
     choose = input("Select your choice: ")
     while choose not in [str(i+1) for i in range(3)]:
@@ -245,7 +245,7 @@ def Add_new_mod():
 def Delet_mod_from_use():
     refresh()
     os.system("cls")
-    print("     DELET MOD FROM USING")
+    print("     DELETe MOD FROM USING")
     print()
     choose = select_mod(mod_in_use)
     if choose is None:return
@@ -293,7 +293,7 @@ def Change_instance():
     print("     CHANGE INSTANCE TO USE")
     print()
     data = read_json()
-    temp_data = [ins for ins in data if ins != "Always_mods"]
+    temp_data = [ins for ins in data]
     if not temp_data:
         print("No instance in the list")
         finish_task()
@@ -384,7 +384,7 @@ def Always_mods_control():
         for i in range(len(temp_data)):
             print(str(i+1)+".", temp_data[i])
         print()
-        second_choose = input("Press 0 to add mod, press 1 to delet mod: ")
+        second_choose = input("Press 0 to add mod, press 1 to delete mod: ")
         while second_choose not in ["0","1"]:
             second_choose = input("Wrong input, please try again: ")
     
