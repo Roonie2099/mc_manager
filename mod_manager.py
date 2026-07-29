@@ -77,7 +77,7 @@ def refresh():
     global mod_in_storage
     global mod_not_in_use
     global instance_using
-    instance_using = "Costom"
+    instance_using = "Custom"
 
     mod_in_use = [
         mod
@@ -418,7 +418,6 @@ def Add_delete_mod_instance():
     print()
     data = read_json()
     temp_data = list(data.keys())
-    temp_data.remove("Always_mods")
     if not temp_data:
         print("No instance to change")
         finish_task()

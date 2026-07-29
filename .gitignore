@@ -10,3 +10,4 @@ build
 *.zip
 release
 *txt
+modrinth_manager.py
